@@ -99,7 +99,7 @@
   <meta name="description" content="林木森森森 姓名：林木森森森 邮箱：953871617@qq.com 职业：目前在校大三学生 github: https://github.com/lmsccc/  本站： 框架：hexo 主题：next  关于名字叫这个名字是因为这三个字都全是木组成的，听起来好文艺好森林系哦听起来又挺像是一个人的名字，至于后面的叠字嘛，是因为林木森实在是太多人叫了，在一些地方很容易重名，英文用户名也是如此，lm">
 <meta property="og:type" content="website">
 <meta property="og:title" content="林木森森森">
-<meta property="og:url" content="http://yoursite.com/about/关于我.html">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="林木森森森">
 <meta property="og:description" content="林木森森森 姓名：林木森森森 邮箱：953871617@qq.com 职业：目前在校大三学生 github: https://github.com/lmsccc/  本站： 框架：hexo 主题：next  关于名字叫这个名字是因为这三个字都全是木组成的，听起来好文艺好森林系哦听起来又挺像是一个人的名字，至于后面的叠字嘛，是因为林木森实在是太多人叫了，在一些地方很容易重名，英文用户名也是如此，lm">
 <meta property="og:locale" content="zh-Hans">
@@ -114,7 +114,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/about/关于我">
+  <link rel="canonical" href="http://yoursite.com/about/">
 
 
 
@@ -405,6 +405,10 @@
           
 
   
+    <div class="comments" id="comments">
+    </div>
+
+  
 
 
 
@@ -665,6 +669,36 @@
   
 
   
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GXS1uV3pHuggJyJxcieFIILP-gzGzoHsz',
+    appKey: '9ETBAlzBqMQf1qvXVoMONrAs',
+    placeholder: '说些什么吧QAQ',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
 
 
   
