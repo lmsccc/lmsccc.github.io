@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "872cf88a"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+  <meta name="description" content="什么是symbolsymbol是用来防止属性名冲突的，用symbol创建的值是独一无二的 创建symbol12let a = Symbol();typeof a//symbol 在es6中，symbol也成为了JavaScript的数据类型之一，其他六种是，undefind，null，number，string，boolean，object symbol创建的时候也可以传入参数，但是这仅仅是他们的">
+<meta name="keywords" content="ES6,Symbol">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6学习之Symbol">
+<meta property="og:url" content="http://yoursite.com/2019/08/15/ES6学习之Symbol/index.html">
+<meta property="og:site_name" content="林木森森森">
+<meta property="og:description" content="什么是symbolsymbol是用来防止属性名冲突的，用symbol创建的值是独一无二的 创建symbol12let a = Symbol();typeof a//symbol 在es6中，symbol也成为了JavaScript的数据类型之一，其他六种是，undefind，null，number，string，boolean，object symbol创建的时候也可以传入参数，但是这仅仅是他们的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-15T09:27:15.956Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6学习之Symbol">
+<meta name="twitter:description" content="什么是symbolsymbol是用来防止属性名冲突的，用symbol创建的值是独一无二的 创建symbol12let a = Symbol();typeof a//symbol 在es6中，symbol也成为了JavaScript的数据类型之一，其他六种是，undefind，null，number，string，boolean，object symbol创建的时候也可以传入参数，但是这仅仅是他们的">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/15/ES6学习之Symbol/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ES6学习之Symbol | 林木森森森</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">林木森森森</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/15/ES6学习之Symbol/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lmsccc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林木森森森">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6学习之Symbol
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-15 17:22:48 / 修改时间：17:27:15" itemprop="dateCreated datePublished" datetime="2019-08-15T17:22:48+08:00">2019-08-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/15/ES6学习之Symbol/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/15/ES6学习之Symbol/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/08/15/ES6学习之Symbol/" class="leancloud_visitors" data-flag-title="ES6学习之Symbol">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是symbol"><a href="#什么是symbol" class="headerlink" title="什么是symbol"></a>什么是symbol</h1><p>symbol是用来防止属性名冲突的，用symbol创建的值是独一无二的</p>
+<h1 id="创建symbol"><a href="#创建symbol" class="headerlink" title="创建symbol"></a>创建symbol</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">typeof</span> a<span class="comment">//symbol</span></span><br></pre></td></tr></table></figure>
+<p>在es6中，symbol也成为了JavaScript的数据类型之一，其他六种是，undefind，null，number，string，boolean，object</p>
+<p>symbol创建的时候也可以传入参数，但是这仅仅是他们的标识符而已，标识符相同这两个symbol并不是相同的<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>(<span class="string">"abc"</span>);</span><br><span class="line"><span class="keyword">let</span> b = Stmbol(<span class="string">"abc"</span>);</span><br><span class="line">a === b <span class="comment">//false;</span></span><br></pre></td></tr></table></figure></p>
+<p>如果需要读取这个标识符，可以使用description<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>(<span class="string">"abc"</span>);</span><br><span class="line">a.description() <span class="comment">// "abc"</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="Symbol的作用"><a href="#Symbol的作用" class="headerlink" title="Symbol的作用"></a>Symbol的作用</h1><p>symbol可以用来作为对象属性的唯一标识符，当一个对象是由多个模块组成的时候，就不怕属性会被覆盖了，在用symbol作为属性的标识符的时候，不可以用点运算符，例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> b = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">b.mySymbol = <span class="string">"hello"</span>;</span><br><span class="line">b[mySymbol] <span class="comment">//undefind;</span></span><br><span class="line">b[<span class="string">"mySymbol"</span>]<span class="comment">//"hello"</span></span><br></pre></td></tr></table></figure>
+<p>这是因为用点运算符添加的属性本质上他的属性名是字符串类型而不是symbol类型的,在对象里面定义属性的时候也要将symbol写在中括号里面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">let</span> b = &#123;</span><br><span class="line">	[a]: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="comment">//somecode</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="消除魔术字符串"><a href="#消除魔术字符串" class="headerlink" title="消除魔术字符串"></a>消除魔术字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> area = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'Triangle'</span>: <span class="comment">// 魔术字符串</span></span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="comment">/* ... more code ... */</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line">getArea(<span class="string">'Triangle'</span>, &#123; <span class="attr">width</span>: <span class="number">100</span>, <span class="attr">height</span>: <span class="number">100</span> &#125;); <span class="comment">// 魔术字符串</span></span><br></pre></td></tr></table></figure>
+<p>这里Triangle是强耦合的，我们要消除它</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shapeType = &#123;</span><br><span class="line">  triangle: <span class="string">'Triangle'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArea</span>(<span class="params">shape, options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> area = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">switch</span> (shape) &#123;</span><br><span class="line">    <span class="keyword">case</span> shapeType.triangle:</span><br><span class="line">      area = <span class="number">.5</span> * options.width * options.height;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> area;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getArea(shapeType.triangle, &#123; <span class="attr">width</span>: <span class="number">100</span>, <span class="attr">height</span>: <span class="number">100</span> &#125;);</span><br></pre></td></tr></table></figure>
+<p>我们发现，shapeType.triangle的值是无所谓的，所以，我们可以将shapeType的triangle用symbol来代替</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shapeType = &#123;</span><br><span class="line">  triangle: <span class="built_in">Symbol</span>()</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h3><p>当我们将单例放到全局对象中的时候</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.foo = <span class="string">'hello'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!global._foo) &#123;</span><br><span class="line">  global._foo = <span class="keyword">new</span> A();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = global._foo;</span><br></pre></td></tr></table></figure>
+<p>加载模块<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./mod.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.foo); <span class="comment">//"hello"</span></span><br></pre></td></tr></table></figure></p>
+<p>这里有一点危险，因为global._foo是可写的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">global._foo = &#123; <span class="attr">foo</span>: <span class="string">'world'</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./mod.js'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(a.foo); <span class="comment">//"hello"</span></span><br></pre></td></tr></table></figure>
+<p>所以我们可以用在global对象上用symbol作为属性名</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FOO_KEY = <span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.foo = <span class="string">'hello'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!global[FOO_KEY]) &#123;</span><br><span class="line">  global[FOO_KEY] = <span class="keyword">new</span> A();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = global[FOO_KEY];</span><br></pre></td></tr></table></figure>
+<p>这样，在global对象上就有一个独一无二的对象名，不怕<strong>无意</strong>和别人的属性名冲突了，要注意，是无意！但其实如果用Symbol.for来写的话还是可以被改写的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">global[<span class="built_in">Symbol</span>.for(<span class="string">'foo'</span>)] = &#123; <span class="attr">foo</span>: <span class="string">'world'</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = <span class="built_in">require</span>(<span class="string">'./mod.js'</span>);</span><br></pre></td></tr></table></figure>
+<p>如果想要不被改写的话，只能使用Symbol（）来生成symbol了</p>
+<h3 id="定义一组值不会重复的常量"><a href="#定义一组值不会重复的常量" class="headerlink" title="定义一组值不会重复的常量"></a>定义一组值不会重复的常量</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> COLOR_RED    = <span class="built_in">Symbol</span>();</span><br><span class="line"><span class="keyword">const</span> COLOR_GREEN  = <span class="built_in">Symbol</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getComplement</span>(<span class="params">color</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">switch</span> (color) &#123;</span><br><span class="line">    <span class="keyword">case</span> COLOR_RED:</span><br><span class="line">      <span class="keyword">return</span> COLOR_GREEN;</span><br><span class="line">    <span class="keyword">case</span> COLOR_GREEN:</span><br><span class="line">      <span class="keyword">return</span> COLOR_RED;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Undefined color'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>最后，symbol是不可枚举的，也就是说，<code>for..of</code> <code>for..in</code> <code>Object.keys()</code>是不能遍历到symbol类型的值的，要得到symbol的值有两种办法，一种是使用<code>Object.getOwnPropertySymbols</code>,返回一个数组包括这个对象中所有的symbol类型的值，另一种是使用<code>Reflect.ownKeys</code>,可以返回常规类型的键名和symbol类型的。我个人认为，symbol就是可以生成一个永不重复的值，然后怎么使用这个值就看写程序的人了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+            <a href="/tags/Symbol/" rel="tag"># Symbol</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/12/bfc/" rel="next" title="什么是bfc？">
+                <i class="fa fa-chevron-left"></i> 什么是bfc？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lmsccc</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是symbol"><span class="nav-number">1.</span> <span class="nav-text">什么是symbol</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建symbol"><span class="nav-number">2.</span> <span class="nav-text">创建symbol</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Symbol的作用"><span class="nav-number">3.</span> <span class="nav-text">Symbol的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例子"><span class="nav-number">3.1.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消除魔术字符串"><span class="nav-number">3.1.1.</span> <span class="nav-text">消除魔术字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式"><span class="nav-number">3.1.2.</span> <span class="nav-text">单例模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定义一组值不会重复的常量"><span class="nav-number">3.1.3.</span> <span class="nav-text">定义一组值不会重复的常量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lmsccc</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GXS1uV3pHuggJyJxcieFIILP-gzGzoHsz',
+    appKey: '9ETBAlzBqMQf1qvXVoMONrAs',
+    placeholder: '说些什么吧QAQ',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
