@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.1.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i["DaoVoiceObject"]=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;a.charset="utf-8";m.parentNode.insertBefore(a,m)})(window,document,"script",('https:' == document.location.protocol ? 'https:' : 'http:') + "//widget.daovoice.io/widget/0f81ff2f.js","daovoice")
+  daovoice('init', {
+      app_id: "872cf88a"
+    });
+  daovoice('update');
+  </script>
+
+
+
+
+  <meta name="description" content="什么是Proxyproxy原意为代理，代理在计算机中通常是指代理服务器，当我们要访问一个网址的时候，要先访问代理服务器，再由代理服务器去访问要访问的网址。而es6中代理的不是服务器，而是对象，当我们要访问一个对象的时候，要先经过Proxy。 如何使用proxyproxy使用构造函数来构建一个新的proxy实例 1var proxy = new Proxy(target,handler); 其中，t">
+<meta name="keywords" content="ES6,Proxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6学习之Proxy">
+<meta property="og:url" content="http://yoursite.com/2019/08/17/ES6学习之Proxy/index.html">
+<meta property="og:site_name" content="林木森森森">
+<meta property="og:description" content="什么是Proxyproxy原意为代理，代理在计算机中通常是指代理服务器，当我们要访问一个网址的时候，要先访问代理服务器，再由代理服务器去访问要访问的网址。而es6中代理的不是服务器，而是对象，当我们要访问一个对象的时候，要先经过Proxy。 如何使用proxyproxy使用构造函数来构建一个新的proxy实例 1var proxy = new Proxy(target,handler); 其中，t">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-17T02:38:27.113Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6学习之Proxy">
+<meta name="twitter:description" content="什么是Proxyproxy原意为代理，代理在计算机中通常是指代理服务器，当我们要访问一个网址的时候，要先访问代理服务器，再由代理服务器去访问要访问的网址。而es6中代理的不是服务器，而是对象，当我们要访问一个对象的时候，要先经过Proxy。 如何使用proxyproxy使用构造函数来构建一个新的proxy实例 1var proxy = new Proxy(target,handler); 其中，t">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://yoursite.com/2019/08/17/ES6学习之Proxy/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>ES6学习之Proxy | 林木森森森</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">林木森森森</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/17/ES6学习之Proxy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="lmsccc">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="林木森森森">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ES6学习之Proxy
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-17 10:36:04 / 修改时间：10:38:27" itemprop="dateCreated datePublished" datetime="2019-08-17T10:36:04+08:00">2019-08-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/17/ES6学习之Proxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/17/ES6学习之Proxy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+            <span id="/2019/08/17/ES6学习之Proxy/" class="leancloud_visitors" data-flag-title="ES6学习之Proxy">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读次数：</span>
+              
+                <span class="leancloud-visitors-count"></span>
+            </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="什么是Proxy"><a href="#什么是Proxy" class="headerlink" title="什么是Proxy"></a>什么是Proxy</h1><p>proxy原意为代理，代理在计算机中通常是指代理服务器，当我们要访问一个网址的时候，要先访问代理服务器，再由代理服务器去访问要访问的网址。而es6中代理的不是服务器，而是对象，当我们要访问一个对象的时候，要先经过Proxy。</p>
+<h1 id="如何使用proxy"><a href="#如何使用proxy" class="headerlink" title="如何使用proxy"></a>如何使用proxy</h1><p>proxy使用构造函数来构建一个新的proxy实例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target,handler);</span><br></pre></td></tr></table></figure>
+<p>其中，target是要设置代理的对象，而handler则是一个用于设置拦截行为的对象</p>
+<p>如果将proxy设置在对象的原型上也可以</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</span><br><span class="line">  <span class="keyword">get</span>: function(target, property) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">35</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = <span class="built_in">Object</span>.create(proxy);</span><br><span class="line">obj.time <span class="comment">// 35</span></span><br></pre></td></tr></table></figure>
+<p><code>obj</code>上没有<code>time</code>属性，所以到原型中去搜索，那么就要经过proxy拦截，而<code>get</code>是一直返回35的，所以访问<code>obj.time</code>返回的是35</p>
+<p>要注意的是，如果想要proxy生效，要对proxy实例进行操作而不是对目标对象进行操作。</p>
+<h1 id="proxy支持的拦截操作"><a href="#proxy支持的拦截操作" class="headerlink" title="proxy支持的拦截操作"></a>proxy支持的拦截操作</h1><ul>
+<li>get(target, propKey, receiver)：拦截对象属性的读取，比如<code>proxy.foo</code>和<code>proxy[&#39;foo&#39;]</code>。</li>
+<li>set(target, propKey, value, receiver)：拦截对象属性的设置，比如<code>proxy.foo = v</code>或<code>proxy[&#39;foo&#39;] = v</code>，返回一个布尔值。</li>
+<li>has(target, propKey)：拦截<code>propKey in proxy</code>的操作，返回一个布尔值。</li>
+<li>deleteProperty(target, propKey)：拦截<code>delete proxy[propKey]</code>的操作，返回一个布尔值。</li>
+<li>ownKeys(target)：拦截<code>Object.getOwnPropertyNames(proxy)</code>、<code>Object.getOwnPropertySymbols(proxy)</code>、<code>Object.keys(proxy)</code>、<code>for...in</code>循环，返回一个数组。该方法返回目标对象所有自身的属性的属性名，而<code>Object.keys()</code>的返回结果仅包括目标对象自身的可遍历属性。</li>
+<li>getOwnPropertyDescriptor(target, propKey)：拦截Object.getOwnPropertyDescriptor<code>(proxy, propKey)</code>，返回属性的描述对象。</li>
+<li>defineProperty(target, propKey, propDesc)：拦截<code>Object.defineProperty(proxy, propKey, propDesc）、Object.defineProperties(proxy, propDescs)</code>，返回一个布尔值。</li>
+<li>preventExtensions(target)：拦截<code>Object.preventExtensions(proxy)</code>，返回一个布尔值。</li>
+<li>getPrototypeOf(target)：拦截<code>Object.getPrototypeOf(proxy)</code>，返回一个对象。</li>
+<li>isExtensible(target)：拦截<code>Object.isExtensible(proxy)</code>，返回一个布尔值。</li>
+<li>setPrototypeOf(target, proto)：拦截<code>Object.setPrototypeOf(proxy, proto)</code>，返回一个布尔值。如果目标对象是函数，那么还有两种额外操作可以拦截。</li>
+<li>apply(target, object, args)：拦截 Proxy 实例作为函数调用的操作，比如<code>proxy(...args)</code>、<code>proxy.call(object, ...args)</code>、<code>proxy.apply(...)</code>。</li>
+<li>construct(target, args)：拦截 Proxy 实例作为构造函数调用的操作，比如<code>new proxy(...args)</code>。</li>
+</ul>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><h2 id="get"><a href="#get" class="headerlink" title="get"></a>get</h2><p>下面是一段利用get来实现生成各种dom节点的通用函数<code>dom</code><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dom = <span class="keyword">new</span> <span class="built_in">Proxy</span>(&#123;&#125;, &#123;</span><br><span class="line">  <span class="keyword">get</span>(target, property) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">attrs = &#123;&#125;, ...children</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//通过拦截访问对象的属性来创建dom节点</span></span><br><span class="line">      <span class="keyword">const</span> el = <span class="built_in">document</span>.createElement(property);</span><br><span class="line">      <span class="comment">//为DOM添加的属性</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> prop <span class="keyword">of</span> <span class="built_in">Object</span>.keys(attrs)) &#123;</span><br><span class="line">        el.setAttribute(prop, attrs[prop]);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//处理DOM的子节点</span></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> child <span class="keyword">of</span> children) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> child === <span class="string">'string'</span>) &#123;</span><br><span class="line">          child = <span class="built_in">document</span>.createTextNode(child);</span><br><span class="line">        &#125;</span><br><span class="line">        el.appendChild(child);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> el;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> el = dom.div(&#123;&#125;,</span><br><span class="line">  <span class="string">'Hello, my name is '</span>,</span><br><span class="line">  dom.a(&#123;<span class="attr">href</span>: <span class="string">'//example.com'</span>&#125;, <span class="string">'Mark'</span>),</span><br><span class="line">  <span class="string">'. I like:'</span>,</span><br><span class="line">  dom.ul(&#123;&#125;,</span><br><span class="line">    dom.li(&#123;&#125;, <span class="string">'The web'</span>),</span><br><span class="line">    dom.li(&#123;&#125;, <span class="string">'Food'</span>),</span><br><span class="line">    dom.li(&#123;&#125;, <span class="string">'…actually that\'s it'</span>)</span><br><span class="line">  )</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.body.appendChild(el);</span><br></pre></td></tr></table></figure></p>
+<h2 id="set"><a href="#set" class="headerlink" title="set"></a>set</h2><p>利用get来防止内部属性被访问</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="keyword">get</span> (target, key) &#123;</span><br><span class="line">    invariant(key, <span class="string">'get'</span>);</span><br><span class="line">    <span class="keyword">return</span> target[key];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span> (target, key, value) &#123;</span><br><span class="line">    invariant(key, <span class="string">'set'</span>);</span><br><span class="line">    target[key] = value;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">invariant</span> (<span class="params">key, action</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (key[<span class="number">0</span>] === <span class="string">'_'</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`Invalid attempt to <span class="subst">$&#123;action&#125;</span> private "<span class="subst">$&#123;key&#125;</span>" property`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> target = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line">proxy._prop</span><br><span class="line"><span class="comment">// Error: Invalid attempt to get private "_prop" property</span></span><br><span class="line">proxy._prop = <span class="string">'c'</span></span><br><span class="line"><span class="comment">// Error: Invalid attempt to set private "_prop" property</span></span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>proxy还有很多其他拦截器，我就不去仔细看了，等用到的时候再研究吧，感觉用的最多的会是get和set两个拦截器。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+            <a href="/tags/Proxy/" rel="tag"># Proxy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/15/ES6学习之Symbol/" rel="next" title="ES6学习之Symbol">
+                <i class="fa fa-chevron-left"></i> ES6学习之Symbol
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/17/Neteastban项目/" rel="prev" title="Neteastban项目">
+                Neteastban项目 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">lmsccc</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是Proxy"><span class="nav-number">1.</span> <span class="nav-text">什么是Proxy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何使用proxy"><span class="nav-number">2.</span> <span class="nav-text">如何使用proxy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#proxy支持的拦截操作"><span class="nav-number">3.</span> <span class="nav-text">proxy支持的拦截操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">4.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#get"><span class="nav-number">4.1.</span> <span class="nav-text">get</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set"><span class="nav-number">4.2.</span> <span class="nav-text">set</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lmsccc</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.1.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.1"></script>
+
+  <script src="/js/motion.js?v=7.1.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/affix.js?v=7.1.1"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.1"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.1"></script>
+<script src="/js/post-details.js?v=7.1.1"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'GXS1uV3pHuggJyJxcieFIILP-gzGzoHsz',
+    appKey: '9ETBAlzBqMQf1qvXVoMONrAs',
+    placeholder: '说些什么吧QAQ',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: true,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
