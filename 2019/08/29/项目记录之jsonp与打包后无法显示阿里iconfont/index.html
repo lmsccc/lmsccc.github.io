@@ -106,22 +106,18 @@
 
 
 
-  <meta name="description" content="介绍这是我学习完VUE全家桶之后练习的项目，目前只完成了豆瓣部分，网易云准备开始着手，豆瓣部分UI是自己写的，感觉好累。。后面的网易云部分准备用vant来写UI，不自己写了。项目中的图片加载使用了vue的插件vue-lazyload，下拉加载更多图片是自己写的。豆瓣的搜索功能是没有做的，因为豆瓣的搜索API最近关闭了。 用到的知识vue + axios + vue-router + Vuex +">
-<meta name="keywords" content="Vue">
+  <meta name="description" content="前言之前我写了一个项目，然后在面试的时候面试官想要看一下我的项目，无奈我没有部署到服务器上面，本来是想趁着周末部署一下的，后来想了一下就为了一个项目太麻烦了，先将就一下将项目打包存到手机上，用手机查看就可以了。那么之前我的这个项目跨域用的是vue-cli的proxy配置选项，也就是代理来解决的，当发布的时候就不可以这样了，要自己写一个代理服务器，所以我就改变了跨域方式，改为使用了Jsonp。 问题">
+<meta name="keywords" content="问题记录,Webpack">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Neteaseban">
-<meta property="og:url" content="http://yoursite.com/2019/08/21/Neteaseban/index.html">
+<meta property="og:title" content="项目记录之jsonp与打包后无法显示阿里iconfont">
+<meta property="og:url" content="http://yoursite.com/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/index.html">
 <meta property="og:site_name" content="林木森森森">
-<meta property="og:description" content="介绍这是我学习完VUE全家桶之后练习的项目，目前只完成了豆瓣部分，网易云准备开始着手，豆瓣部分UI是自己写的，感觉好累。。后面的网易云部分准备用vant来写UI，不自己写了。项目中的图片加载使用了vue的插件vue-lazyload，下拉加载更多图片是自己写的。豆瓣的搜索功能是没有做的，因为豆瓣的搜索API最近关闭了。 用到的知识vue + axios + vue-router + Vuex +">
+<meta property="og:description" content="前言之前我写了一个项目，然后在面试的时候面试官想要看一下我的项目，无奈我没有部署到服务器上面，本来是想趁着周末部署一下的，后来想了一下就为了一个项目太麻烦了，先将就一下将项目打包存到手机上，用手机查看就可以了。那么之前我的这个项目跨域用的是vue-cli的proxy配置选项，也就是代理来解决的，当发布的时候就不可以这样了，要自己写一个代理服务器，所以我就改变了跨域方式，改为使用了Jsonp。 问题">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/08/21/Neteaseban/1.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/21/Neteaseban/2.png">
-<meta property="og:image" content="http://yoursite.com/2019/08/21/Neteaseban/3.png">
-<meta property="og:updated_time" content="2019-08-29T09:36:40.497Z">
+<meta property="og:updated_time" content="2019-08-29T09:22:29.884Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Neteaseban">
-<meta name="twitter:description" content="介绍这是我学习完VUE全家桶之后练习的项目，目前只完成了豆瓣部分，网易云准备开始着手，豆瓣部分UI是自己写的，感觉好累。。后面的网易云部分准备用vant来写UI，不自己写了。项目中的图片加载使用了vue的插件vue-lazyload，下拉加载更多图片是自己写的。豆瓣的搜索功能是没有做的，因为豆瓣的搜索API最近关闭了。 用到的知识vue + axios + vue-router + Vuex +">
-<meta name="twitter:image" content="http://yoursite.com/2019/08/21/Neteaseban/1.png">
+<meta name="twitter:title" content="项目记录之jsonp与打包后无法显示阿里iconfont">
+<meta name="twitter:description" content="前言之前我写了一个项目，然后在面试的时候面试官想要看一下我的项目，无奈我没有部署到服务器上面，本来是想趁着周末部署一下的，后来想了一下就为了一个项目太麻烦了，先将就一下将项目打包存到手机上，用手机查看就可以了。那么之前我的这个项目跨域用的是vue-cli的proxy配置选项，也就是代理来解决的，当发布的时候就不可以这样了，要自己写一个代理服务器，所以我就改变了跨域方式，改为使用了Jsonp。 问题">
 
 
 
@@ -129,7 +125,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/2019/08/21/Neteaseban/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/">
 
 
 
@@ -139,7 +135,7 @@
   };
 </script>
 
-  <title>Neteaseban | 林木森森森</title>
+  <title>项目记录之jsonp与打包后无法显示阿里iconfont | 林木森森森</title>
   
 
 
@@ -355,7 +351,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/21/Neteaseban/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="lmsccc">
@@ -372,7 +368,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Neteaseban
+          <h1 class="post-title" itemprop="name headline">项目记录之jsonp与打包后无法显示阿里iconfont
 
               
             
@@ -398,24 +394,12 @@
                 
               
 
-              <time title="创建时间：2019-08-21 11:41:58" itemprop="dateCreated datePublished" datetime="2019-08-21T11:41:58+08:00">2019-08-21</time>
+              <time title="创建时间：2019-08-29 17:17:39 / 修改时间：17:22:29" itemprop="dateCreated datePublished" datetime="2019-08-29T17:17:39+08:00">2019-08-29</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-29 17:36:40" itemprop="dateModified" datetime="2019-08-29T17:36:40+08:00">2019-08-29</time>
               
             
           </span>
@@ -451,8 +435,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/21/Neteaseban/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/Neteaseban/" itemprop="commentCount"></span>
+                <a href="/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -460,7 +444,7 @@
 
           
           
-            <span id="/2019/08/21/Neteaseban/" class="leancloud_visitors" data-flag-title="Neteaseban">
+            <span id="/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/" class="leancloud_visitors" data-flag-title="项目记录之jsonp与打包后无法显示阿里iconfont">
               <span class="post-meta-divider">|</span>
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
@@ -491,11 +475,15 @@
       
 
       
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>这是我学习完VUE全家桶之后练习的项目，目前只完成了豆瓣部分，网易云准备开始着手，豆瓣部分UI是自己写的，感觉好累。。后面的网易云部分准备用vant来写UI，不自己写了。项目中的图片加载使用了vue的插件vue-lazyload，下拉加载更多图片是自己写的。豆瓣的搜索功能是没有做的，因为豆瓣的搜索API最近关闭了。</p>
-<h1 id="用到的知识"><a href="#用到的知识" class="headerlink" title="用到的知识"></a>用到的知识</h1><p>vue + axios + vue-router + Vuex + vue-cli</p>
-<h1 id="运行截图"><a href="#运行截图" class="headerlink" title="运行截图"></a>运行截图</h1><p><img src="1.png" alt="在这里插入图片描述"><br><img src="2.png" alt="在这里插入图片描述"><br><img src="3.png" alt="在这里插入图片描述"></p>
-<h1 id="源码地址"><a href="#源码地址" class="headerlink" title="源码地址"></a>源码地址</h1><p><a href="https://github.com/lmsccc/neteaseban" target="_blank" rel="noopener">https://github.com/lmsccc/neteaseban</a></p>
-<h1 id="项目开发记录"><a href="#项目开发记录" class="headerlink" title="项目开发记录"></a>项目开发记录</h1><p><a href="https://blog.csdn.net/huahuahua__/article/details/100064412" target="_blank" rel="noopener">项目记录之jsonp与打包后无法显示阿里iconfont</a></p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前我写了一个<a href="https://blog.csdn.net/huahuahua__/article/details/99689537" target="_blank" rel="noopener">项目</a>，然后在面试的时候面试官想要看一下我的项目，无奈我没有部署到服务器上面，本来是想趁着周末部署一下的，后来想了一下就为了一个项目太麻烦了，先将就一下将项目打包存到手机上，用手机查看就可以了。那么之前我的这个项目跨域用的是vue-cli的proxy配置选项，也就是代理来解决的，当发布的时候就不可以这样了，要自己写一个代理服务器，所以我就改变了跨域方式，改为使用了Jsonp。</p>
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><h2 id="使用Jsonp之后，请求无法并发执行"><a href="#使用Jsonp之后，请求无法并发执行" class="headerlink" title="使用Jsonp之后，请求无法并发执行"></a>使用Jsonp之后，请求无法并发执行</h2><p>使用了jsonp之后，因为要提前写好一个函数以供<code>script</code>标签请求返回后调用，问题就是出在这个函数上，这个函数要负责触发对应的回调函数，那么当请求并发的时候，这个函数就会被多次覆盖重写，从而导致前面的请求无法正确被对应的回调函数处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">getJson</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(url.includes(<span class="string">'?'</span>))&#123;</span><br><span class="line">            url += <span class="string">'&amp;callback=responHeader'</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            url += <span class="string">'?callback=respnHeader'</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">        <span class="built_in">window</span>.responHeader = <span class="function"><span class="keyword">function</span>(<span class="params">json</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                resolve(json);</span><br><span class="line">            &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">                script.parentNode.removeChild(script);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        script.setAttribute(<span class="string">'src'</span>,url);</span><br><span class="line">        <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例如我封装的jsonp函数，要在全局作用域声明一个<code>responHeader</code>函数供<code>Jsonp</code>调用，当请求并发的时候，<code>responHeader</code>会被多次重新赋值成一个新的函数，而函数里面的<code>resolve</code>自然也就不是对应<code>promise</code>了，我的意思是，当<code>script</code>标签请求的数据响应的时候，触发<code>responHeader</code>,那么此时调用的<code>resolve</code>是属于最后一次请求的<code>promise</code>，前两次请求的<code>promise</code>就永远无法被<code>resolve</code>了  </p>
+<p>那么为了解决这个问题，我只能将请求由并发变成串发，这样就不会有这样的问题了。如果大家有更好的解决办法欢迎评论。</p>
+<p>8-29更新<br>发现了有人写了解决这个问题的办法，npm有个包叫jsonp-bugfree，可以让jsonp请求排队执行，也就是并发改串发，不过他写的代码需要依赖jquery, 为了解决这个问题而引入jquery显然不太合适，我后面试一下能不能将其改造成不需要依赖jquery。</p>
+<h2 id="打包之后加载CSS-JS文件路径出错"><a href="#打包之后加载CSS-JS文件路径出错" class="headerlink" title="打包之后加载CSS,JS文件路径出错"></a>打包之后加载CSS,JS文件路径出错</h2><p>这个问题在<code>vue.config.js</code>文件里面修改<code>publicPath</code>配置，改成相对路径就可以了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//vue.config.js</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    publicPath: <span class="string">'./'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="打包之后无法显示iconfont"><a href="#打包之后无法显示iconfont" class="headerlink" title="打包之后无法显示iconfont"></a>打包之后无法显示iconfont</h2><p>将阿里提供的代码手动补全<code>http://</code>就可以解决这个问题了，出现这个问题是因为不知道为什么如果我们没有写的话会自动补全成<code>file://</code>,有知道的欢迎评论<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">font-face</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">'iconfont'</span>;  <span class="comment">/* project id 1319331 */</span></span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'https://at.alicdn.com/t/font_1319331_xnma1wvpymi.eot'</span>);</span><br><span class="line">    <span class="attribute">src</span>: <span class="built_in">url</span>(<span class="string">'https://at.alicdn.com/t/font_1319331_xnma1wvpymi.eot?#iefix'</span>) <span class="built_in">format</span>(<span class="string">'embedded-opentype'</span>),</span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'https://at.alicdn.com/t/font_1319331_xnma1wvpymi.woff2'</span>) <span class="built_in">format</span>(<span class="string">'woff2'</span>),</span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'https://at.alicdn.com/t/font_1319331_xnma1wvpymi.woff'</span>) <span class="built_in">format</span>(<span class="string">'woff'</span>),</span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'https://at.alicdn.com/t/font_1319331_xnma1wvpymi.ttf'</span>) <span class="built_in">format</span>(<span class="string">'truetype'</span>),</span><br><span class="line">    <span class="built_in">url</span>(<span class="string">'https://at.alicdn.com/t/font_1319331_xnma1wvpymi.svg#iconfont'</span>) <span class="built_in">format</span>(<span class="string">'svg'</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -519,7 +507,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Vue/" rel="tag"># Vue</a>
+            <a href="/tags/问题记录/" rel="tag"># 问题记录</a>
+          
+            <a href="/tags/Webpack/" rel="tag"># Webpack</a>
           
         </div>
       
@@ -532,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/17/ES6学习之Proxy/" rel="next" title="ES6学习之Proxy">
-                <i class="fa fa-chevron-left"></i> ES6学习之Proxy
+              <a href="/2019/08/21/Neteaseban/" rel="next" title="Neteaseban">
+                <i class="fa fa-chevron-left"></i> Neteaseban
               </a>
             
           </div>
@@ -542,8 +532,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/29/项目记录之jsonp与打包后无法显示阿里iconfont/" rel="prev" title="项目记录之jsonp与打包后无法显示阿里iconfont">
-                项目记录之jsonp与打包后无法显示阿里iconfont <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/29/ES6学习之Promise/" rel="prev" title="ES6学习之Promise">
+                ES6学习之Promise <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -725,7 +715,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用到的知识"><span class="nav-number">2.</span> <span class="nav-text">用到的知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运行截图"><span class="nav-number">3.</span> <span class="nav-text">运行截图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码地址"><span class="nav-number">4.</span> <span class="nav-text">源码地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目开发记录"><span class="nav-number">5.</span> <span class="nav-text">项目开发记录</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Jsonp之后，请求无法并发执行"><span class="nav-number">2.1.</span> <span class="nav-text">使用Jsonp之后，请求无法并发执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包之后加载CSS-JS文件路径出错"><span class="nav-number">2.2.</span> <span class="nav-text">打包之后加载CSS,JS文件路径出错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打包之后无法显示iconfont"><span class="nav-number">2.3.</span> <span class="nav-text">打包之后无法显示iconfont</span></a></li></ol></li></ol></div>
             
 
           </div>
